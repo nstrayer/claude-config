@@ -1,0 +1,28 @@
+# Runtime data - do not track
+history.jsonl
+debug/
+file-history/
+session-env/
+shell-snapshots/
+paste-cache/
+plans/
+todos/
+tasks/
+cache/
+statsig/
+stats-cache.json
+
+# Project-specific data (contains session transcripts)
+projects/
+
+# IDE integration state
+ide/
+
+# macOS
+.DS_Store
+
+# Env files with secrets
+*.env
+
+# Backup directories (if you want to keep these, remove this line)
+*_backup/

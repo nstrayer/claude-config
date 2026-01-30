@@ -1,0 +1,34 @@
+{
+  "anthropic-agent-skills": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/skills"
+    },
+    "installLocation": "/Users/nicholasstrayer/.claude/plugins/marketplaces/anthropic-agent-skills",
+    "lastUpdated": "2025-12-19T14:52:33.227Z"
+  },
+  "claude-plugins-official": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/claude-plugins-official"
+    },
+    "installLocation": "/Users/nicholasstrayer/.claude/plugins/marketplaces/claude-plugins-official",
+    "lastUpdated": "2026-01-30T15:31:53.199Z"
+  },
+  "jeffh-claude-plugins": {
+    "source": {
+      "source": "github",
+      "repo": "jeffh/claude-plugins"
+    },
+    "installLocation": "/Users/nicholasstrayer/.claude/plugins/marketplaces/jeffh-claude-plugins",
+    "lastUpdated": "2025-12-30T02:35:46.794Z"
+  },
+  "bootandshoe-claude-planning": {
+    "source": {
+      "source": "github",
+      "repo": "nstrayer/claude-planning"
+    },
+    "installLocation": "/Users/nicholasstrayer/.claude/plugins/marketplaces/bootandshoe-claude-planning",
+    "lastUpdated": "2026-01-12T18:31:55.032Z"
+  }
+}

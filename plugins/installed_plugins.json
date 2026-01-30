@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "plugins": {
+    "bootandshoe@bootandshoe-claude-planning": [
+      {
+        "scope": "user",
+        "installPath": "/Users/nicholasstrayer/.claude/plugins/cache/bootandshoe-claude-planning/bootandshoe/2026-01-11",
+        "version": "2026-01-11",
+        "installedAt": "2026-01-07T18:38:26.343Z",
+        "lastUpdated": "2026-01-11T18:23:15.005Z"
+      }
+    ],
+    "plugin-dev@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/nicholasstrayer/.claude/plugins/cache/claude-plugins-official/plugin-dev/27d2b86d72da",
+        "version": "27d2b86d72da",
+        "installedAt": "2026-01-09T14:48:19.931Z",
+        "lastUpdated": "2026-01-30T01:50:22.877Z"
+      }
+    ],
+    "swift-lsp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/nicholasstrayer/.claude/plugins/cache/claude-plugins-official/swift-lsp/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-01-16T17:20:14.515Z",
+        "lastUpdated": "2026-01-16T17:20:14.515Z",
+        "gitCommitSha": "96276205880a60fd66bbae981f5ab568e70c4cbf"
+      }
+    ],
+    "frontend-design@claude-plugins-official": [
+      {
+        "scope": "project",
+        "projectPath": "/Users/nicholasstrayer/dev/positron-work/issue-intake-dashboard",
+        "installPath": "/Users/nicholasstrayer/.claude/plugins/cache/claude-plugins-official/frontend-design/27d2b86d72da",
+        "version": "27d2b86d72da",
+        "installedAt": "2026-01-28T03:16:14.107Z",
+        "lastUpdated": "2026-01-30T01:58:39.913Z",
+        "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
+      }
+    ],
+    "code-simplifier@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/nicholasstrayer/.claude/plugins/cache/claude-plugins-official/code-simplifier/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-01-28T17:17:39.971Z",
+        "lastUpdated": "2026-01-28T17:17:39.971Z",
+        "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
+      }
+    ]
+  }
+}

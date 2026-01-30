@@ -27,4 +27,5 @@ ide/
 # Backup directories (if you want to keep these, remove this line)
 *_backup/
 plugins/known_marketplaces.json
-image-cache/*
+plugins/marketplaces/
+image-cache/

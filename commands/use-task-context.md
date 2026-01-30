@@ -80,6 +80,32 @@ As you work, keep the task context file updated with meaningful changes. Don't a
 
 Keep updates concise—a bullet point, not a paragraph. The goal is that if this session ends unexpectedly, the context file reflects where things actually stand.
 
+## Context Gap Detection
+
+As you work, notice when you had to look up information that should have been in the context file. Common gaps include:
+
+**Files you had to discover:**
+- Files that turned out to be central but weren't listed in Key Files
+- Related files that were frequently opened together
+
+**Decisions you had to re-derive:**
+- Patterns you had to figure out by reading code ("why is it done this way?")
+- Constraints or requirements that affected your approach
+
+**Context you had to reconstruct:**
+- Background that would have saved time if documented
+- Relationships between components that weren't clear
+
+**When you notice a gap:**
+- Add it to the appropriate section immediately (don't wait)
+- Keep additions concise—a bullet point, not a paragraph
+- Only add information that would genuinely help future sessions
+
+**Example additions:**
+- Key Files: "`src/utils/validators.ts` - all form validation logic lives here"
+- Decisions: "**Using server-side validation only**: Client validation was removed to reduce bundle size"
+- Current State: "Note: The auth flow depends on the session middleware in `middleware/auth.ts`"
+
 ## Important Behaviors
 
 - **Single context at a time** - If asked to load a different context mid-session, that's a context switch. Acknowledge you're now focused on the new task.

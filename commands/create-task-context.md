@@ -118,22 +118,40 @@ Write to `thoughts/tasks/{task-slug}.md` using this format:
 
 **Status:** in-progress
 **Last Updated:** {today's date}
-**Tracked Files:** {comma-separated list for staleness detection}
+
+## Context for Claude
+
+When working with this task, keep this file updated:
+- **Current State**: Update when features/components are completed
+- **Decisions Made**: Add when you choose between approaches (include why)
+- **Key Files**: Add files you discover that are central but weren't listed
+- **Gap detection**: If you had to look something up that should have been documented here, add it immediately
+
+Keep updates concise—bullet points, not paragraphs.
 
 ## Overview
+
 {1-2 sentence description}
 
 ## Key Files
+
 - `path/to/file` - {brief role}
 
 ## Decisions Made
+
 - **[What you decided]**: [Why - what alternatives you considered]
 
 ## Current State
+
 {Summary of work completed}
 
 ## Related Docs
+
 - {Links if any, or remove section}
+
+## Notes
+
+{Free-form notes for yourself or Claude - context, gotchas, reminders, etc.}
 ```
 
 **Important constraints:**
@@ -148,7 +166,7 @@ After saving, output:
 ```
 ✓ Task context saved: thoughts/tasks/{task-slug}.md
 
-To load this context in a new session: /use-task-context {task-slug}
+To continue in a new session: @thoughts/tasks/{task-slug}.md
 ```
 
 ## Proactive Update Reminder

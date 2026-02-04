@@ -1,5 +1,160 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "awsAuthRefresh": "aws sso login --profile claude",
+  "env": {
+    "CLAUDE_CODE_USE_BEDROCK": "1",
+    "AWS_PROFILE": "claude",
+    "AWS_REGION": "us-east-2",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "us.anthropic.claude-opus-4-5-20251101-v1:0"
+  },
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "WebFetch",
+      "WebSearch",
+      "Task",
+      "Bash(*pbcopy*)"
+    ]
+  },
+  "model": "us.anthropic.claude-opus-4-5-20251101-v1:0",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-office-hook session_start",
+            "timeout": 2
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-office-hook session_end",
+            "timeout": 2
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-office-hook pre_tool_use",
+            "timeout": 2
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-office-hook post_tool_use",
+            "timeout": 2
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-office-hook user_prompt_submit",
+            "timeout": 2
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-office-hook permission_request",
+            "timeout": 2
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-office-hook notification",
+            "timeout": 2
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-office-hook stop",
+            "timeout": 2
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-office-hook subagent_start",
+            "timeout": 2
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-office-hook subagent_stop",
+            "timeout": 2
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-office-hook pre_compact",
+            "timeout": 2
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "bootandshoe@bootandshoe-claude-planning": true,
+    "code-simplifier@claude-plugins-official": true
+  },
   "spinnerVerbs": {
     "mode": "append",
     "verbs": [
@@ -35,162 +190,5 @@
       "Distilling"
     ]
   },
-  "awsAuthRefresh": "aws sso login --profile claude",
-  "env": {
-    "CLAUDE_CODE_USE_BEDROCK": "1",
-    "AWS_PROFILE": "claude",
-    "AWS_REGION": "us-east-2",
-    "ANTHROPIC_DEFAULT_SONNET_MODEL": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
-    "CLAUDE_CODE_SUBAGENT_MODEL": "us.anthropic.claude-opus-4-5-20251101-v1:0"
-  },
-  "includeCoAuthoredBy": false,
-  "permissions": {
-    "allow": [
-      "WebFetch",
-      "WebSearch",
-      "Task",
-      "Bash(*pbcopy*)"
-    ]
-  },
-  "model": "us.anthropic.claude-opus-4-5-20251101-v1:0",
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
-  },
-  "enabledPlugins": {
-    "bootandshoe@bootandshoe-claude-planning": true,
-    "plugin-dev@claude-plugins-official": true,
-    "swift-lsp@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true
-  },
-  "alwaysThinkingEnabled": true,
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claude-office-hook session_start",
-            "timeout": 2
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claude-office-hook session_end",
-            "timeout": 2
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claude-office-hook pre_tool_use",
-            "timeout": 2
-          }
-        ],
-        "matcher": ".*"
-      }
-    ],
-    "PostToolUse": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claude-office-hook post_tool_use",
-            "timeout": 2
-          }
-        ],
-        "matcher": ".*"
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claude-office-hook user_prompt_submit",
-            "timeout": 2
-          }
-        ]
-      }
-    ],
-    "PermissionRequest": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claude-office-hook permission_request",
-            "timeout": 2
-          }
-        ],
-        "matcher": ".*"
-      }
-    ],
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claude-office-hook notification",
-            "timeout": 2
-          }
-        ],
-        "matcher": ".*"
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claude-office-hook stop",
-            "timeout": 2
-          }
-        ]
-      }
-    ],
-    "SubagentStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claude-office-hook subagent_start",
-            "timeout": 2
-          }
-        ],
-        "matcher": ".*"
-      }
-    ],
-    "SubagentStop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claude-office-hook subagent_stop",
-            "timeout": 2
-          }
-        ],
-        "matcher": ".*"
-      }
-    ],
-    "PreCompact": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claude-office-hook pre_compact",
-            "timeout": 2
-          }
-        ]
-      }
-    ]
-  }
+  "alwaysThinkingEnabled": true
 }

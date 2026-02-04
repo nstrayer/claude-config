@@ -28,4 +28,6 @@ ide/
 *_backup/
 plugins/known_marketplaces.json
 plugins/marketplaces/
+plugins/install-counts-cache.json
+plugins/installed_plugins.json
 image-cache/

@@ -1,5 +1,12 @@
 ---
 description: Review PR changes for over-engineering and duplication before submission
+arguments:
+  - name: issue
+    description: GitHub issue number this PR addresses (e.g., 123)
+    required: false
+  - name: pr
+    description: GitHub PR number to review (e.g., 456)
+    required: false
 ---
 
 # Check PR for Simplification Opportunities
@@ -10,7 +17,16 @@ Review the current changes to catch over-engineering before PR submission.
 
 ### Step 1: Understand Intent
 
-First, ask what this PR is supposed to accomplish using the AskUserQuestion tool:
+Gather context about what this PR is supposed to accomplish.
+
+**If issue number provided ($ARGUMENTS.issue):**
+Use `gh issue view $ARGUMENTS.issue` to fetch the issue details. Extract the problem statement and acceptance criteria to understand the goal.
+
+**If PR number provided ($ARGUMENTS.pr):**
+Use `gh pr view $ARGUMENTS.pr` to fetch the PR description and any linked issues. This provides the author's stated intent.
+
+**If neither provided:**
+Ask what this PR is supposed to accomplish using the AskUserQuestion tool:
 - Question: "What is this PR supposed to accomplish? (Brief description)"
 - Header: "PR Intent"
 - Let them describe in their own words (use options that cover common cases plus free-form)
@@ -19,6 +35,12 @@ This context helps judge if the implementation is proportional to the goal.
 
 ### Step 2: Gather Changes
 
+**If PR number provided ($ARGUMENTS.pr):**
+Run these commands to understand what changed:
+- `gh pr diff $ARGUMENTS.pr --stat` - see files changed and line counts
+- `gh pr diff $ARGUMENTS.pr` - see actual changes
+
+**Otherwise (local changes):**
 Run these commands to understand what changed:
 - `git diff --stat HEAD` - see files changed and line counts
 - `git diff HEAD` - see actual changes
@@ -58,8 +80,12 @@ Output a structured report:
 ```
 ## PR Simplification Report
 
+### Context
+[If issue provided: "Addressing issue #N: [issue title]"]
+[If PR provided: "Reviewing PR #N: [PR title]"]
+
 ### Intent
-[What the user said this PR accomplishes]
+[Summary of what this PR accomplishes - from issue, PR description, or user input]
 
 ### Findings
 

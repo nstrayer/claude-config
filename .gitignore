@@ -31,3 +31,6 @@ plugins/marketplaces/
 plugins/install-counts-cache.json
 plugins/installed_plugins.json
 image-cache/
+settings.json
+plugins/marketplaces/bootandshoe-claude-planning
+plugins/marketplaces/claude-plugins-official

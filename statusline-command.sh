@@ -55,8 +55,20 @@ fi
 # Get git repo and branch (if applicable)
 git_info=""
 if git rev-parse --is-inside-work-tree &>/dev/null; then
-  repo_name=$(basename "$(git rev-parse --show-toplevel 2>/dev/null)")
+  # Use git-common-dir to get the main repo name (works in worktrees)
+  git_common_dir=$(git rev-parse --git-common-dir 2>/dev/null)
+  if [ "$git_common_dir" != ".git" ] && [ "$git_common_dir" != "." ]; then
+    # Linked worktree: git-common-dir points to main repo's .git dir
+    repo_name=$(basename "$(dirname "$git_common_dir")")
+  else
+    # Main worktree or normal repo
+    repo_name=$(basename "$(git rev-parse --show-toplevel 2>/dev/null)")
+  fi
   branch=$(git branch --show-current 2>/dev/null)
+  # Truncate long branch names: show ...last20chars if over 23
+  if [ -n "$branch" ] && [ "${#branch}" -gt 23 ]; then
+    branch="...${branch: -20}"
+  fi
   if [ -n "$branch" ]; then
     git_info="${repo_name}:${branch}"
   elif head=$(git rev-parse --short HEAD 2>/dev/null); then

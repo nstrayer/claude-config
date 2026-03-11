@@ -1,6 +1,6 @@
 ---
+name: audit
 description: Surface project issues that caused friction in this session
-argument-hint: Optional focus (e.g., "testing", "structure", "patterns")
 ---
 
 # Audit This Session
@@ -193,10 +193,10 @@ Each recommendation must be:
 ### Avoid Over-Engineering
 
 Recommendations should fix the problem, not redesign the system:
-- Missing test → Add test for this behavior
-- Implicit behavior → Add explicit initialization or documentation
-- Inconsistent pattern → Align with dominant pattern OR document when to use each
-- Scattered config → Consolidate OR add clear cross-references
+- Missing test -> Add test for this behavior
+- Implicit behavior -> Add explicit initialization or documentation
+- Inconsistent pattern -> Align with dominant pattern OR document when to use each
+- Scattered config -> Consolidate OR add clear cross-references
 
 Do NOT suggest:
 - Wholesale rewrites when targeted fixes suffice

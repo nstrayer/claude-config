@@ -1,6 +1,6 @@
 ---
+name: reflect
 description: Analyze the session to surface learnings and improve your Claude setup
-argument-hint: Optional focus (e.g., "workflow", "tools", "mistakes")
 ---
 
 # Reflect on This Session
@@ -24,10 +24,8 @@ You are performing a deep, multi-dimensional analysis of this coding session to 
 ## Framing: Blameless Analysis
 
 All analysis should be framed as **systemic improvements**, not blame:
-- ✓ "CLAUDE.md could benefit from documenting X"
-- ✓ "Session would have been smoother with context about Y"
-- ✗ "Claude made a mistake by doing Z"
-- ✗ "User should have specified W"
+- "CLAUDE.md could benefit from documenting X"
+- "Session would have been smoother with context about Y"
 
 Assume all parties acted reasonably given available information. Focus on **what context was missing**, not who was at fault.
 
@@ -176,13 +174,13 @@ For each actionable finding, determine where it belongs:
 
 ### Infer Automatically When Clear
 
-**Project-specific signals** → Project CLAUDE.md:
+**Project-specific signals** -> Project CLAUDE.md:
 - File paths, directory names specific to this repo
 - Project commands (`pnpm`, `cargo`, specific scripts)
 - Architecture decisions for this codebase
 - Dependencies or tooling specific to this project
 
-**Global signals** → `~/.claude/CLAUDE.md`:
+**Global signals** -> `~/.claude/CLAUDE.md`:
 - Personal preferences (coding style, communication)
 - General patterns that apply everywhere
 - Universal behaviors you want Claude to follow
@@ -224,13 +222,11 @@ Before proposing a CLAUDE.md entry, verify it passes these criteria:
 ```diff
 + - Run `pnpm test:unit` before commits (CI requires passing tests)
 ```
-↑ Atomic, precise trigger, explains why
 
 **Example of bad rule:**
 ```diff
 + - Write good code and follow best practices
 ```
-↑ Vague, not actionable, no clear trigger
 
 ### CLAUDE.md Changes
 

@@ -1,6 +1,6 @@
 ---
+name: think-through
 description: A thinking partner to help clarify your ideas
-argument-hint: What to think through (optional - uses conversation context)
 ---
 
 # Think-Through Mode
@@ -16,9 +16,9 @@ Use the full conversation history. If no topic provided, infer from recent discu
 ## How to Work
 
 - Ask one question at a time using AskUserQuestion
-- Follow their train of thought—help them find their own answers
+- Follow their train of thought--help them find their own answers
 - Probe deeper when something seems fuzzy or important
-- Don't implement anything—this is pure discovery
+- Don't implement anything--this is pure discovery
 - Be curious, not interrogating. Mirror their vocabulary.
 - Only read files if truly necessary to ask better questions
 

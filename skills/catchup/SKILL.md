@@ -1,6 +1,6 @@
 ---
+name: catchup
 description: Get oriented after being away - understand what you were working on and where you left off
-argument-hint: Optional focus area (e.g., "design work", "the auth feature")
 ---
 
 # Catch Up on Previous Work

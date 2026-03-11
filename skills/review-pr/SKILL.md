@@ -1,6 +1,6 @@
 ---
+name: review-pr
 description: Get acquainted with a PR - checkout and generate a summary document
-argument-hint: PR number or URL (e.g., "123" or "https://github.com/org/repo/pull/123")
 ---
 
 # Review PR: Get Acquainted Before Diving In
@@ -169,7 +169,7 @@ Create file at project root: `PR-REVIEW-<number>.md`
 # PR #<number>: <title>
 
 **Author**: @<author login>
-**Branch**: <headRefName> → <baseRefName>
+**Branch**: <headRefName> -> <baseRefName>
 **URL**: <url>
 <If isDraft is true, include: **Status**: Draft>
 **Stats**: +<additions> -<deletions> across <changedFiles> files <(comparison to median, e.g., "larger than typical: median is +45 -20")>

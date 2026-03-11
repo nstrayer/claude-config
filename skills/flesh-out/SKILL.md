@@ -1,6 +1,6 @@
 ---
+name: flesh-out
 description: Flesh out an app/feature idea by establishing the "why" before the "what", producing a basic PRD
-arg: idea name or concept (e.g., "bookmark manager for developers")
 ---
 
 # Flesh Out: $ARGUMENTS
@@ -100,6 +100,6 @@ After saving, share the file path and offer to discuss any section further or be
 - Ask ONE question at a time, wait for the response
 - Challenge vague answers: "Can you give me a specific example?"
 - Mirror the user's language and terminology
-- Be willing to say "this might not be worth building" — that's a valuable outcome
+- Be willing to say "this might not be worth building" -- that's a valuable outcome
 - If the user gets defensive, acknowledge the idea might still be good but needs sharper framing
 - Keep the tone collaborative, not interrogative

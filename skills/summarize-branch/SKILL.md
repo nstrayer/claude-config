@@ -1,6 +1,6 @@
 ---
+name: summarize-branch
 description: Generate a summary document of work done on the current branch
-argument-hint: Base branch to compare against (optional, defaults to main)
 ---
 
 # Summarize Branch

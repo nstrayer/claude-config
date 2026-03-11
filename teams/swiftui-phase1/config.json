@@ -1,0 +1,19 @@
+{
+  "name": "swiftui-phase1",
+  "description": "Phase 1 SwiftUI migration - building the core iOS app with BYOK",
+  "createdAt": 1771609184566,
+  "leadAgentId": "team-lead@swiftui-phase1",
+  "leadSessionId": "773e01b0-66f0-400f-8b47-325c268d9381",
+  "members": [
+    {
+      "agentId": "team-lead@swiftui-phase1",
+      "name": "team-lead",
+      "agentType": "team-lead",
+      "model": "us.anthropic.claude-opus-4-6-v1[1m]",
+      "joinedAt": 1771609184566,
+      "tmuxPaneId": "",
+      "cwd": "/Users/nicholasstrayer/dev/ai/kroger-list",
+      "subscriptions": []
+    }
+  ]
+}

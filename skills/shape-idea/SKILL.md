@@ -1,11 +1,11 @@
 ---
-name: flesh-out
-description: Flesh out an app/feature idea by establishing the "why" before the "what", producing a basic PRD
+name: shape-idea
+description: Explore and shape a rough idea into a clear PRD through guided discovery
 ---
 
-# Flesh Out: $ARGUMENTS
+# Shape Idea: $ARGUMENTS
 
-You are helping the user flesh out an idea and turn it into a clear PRD. Your job is to ensure the "why" is rock solid before exploring the "what".
+You are helping the user shape a rough idea into a clear PRD. Your job is to ensure the "why" is rock solid before exploring the "what".
 
 ## Process
 

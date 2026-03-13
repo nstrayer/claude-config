@@ -3,6 +3,7 @@ history.jsonl
 debug/
 file-history/
 session-env/
+sessions/
 shell-snapshots/
 paste-cache/
 plans/

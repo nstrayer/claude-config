@@ -1,6 +1,6 @@
 ---
 name: shape-idea
-description: Explore and shape a rough idea into a clear PRD through guided discovery
+description: Turn a vague idea into a written PRD through guided discovery (pre-implementation)
 ---
 
 # Shape Idea: $ARGUMENTS

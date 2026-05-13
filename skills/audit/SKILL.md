@@ -1,6 +1,6 @@
 ---
 name: audit
-description: Surface project issues that caused friction in this session
+description: Analyze this session to surface codebase friction (project improvements, not config)
 ---
 
 # Audit This Session

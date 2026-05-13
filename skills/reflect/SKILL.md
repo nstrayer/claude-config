@@ -1,6 +1,6 @@
 ---
 name: reflect
-description: Analyze the session to surface learnings and improve your Claude setup
+description: Analyze this session to improve Claude config (CLAUDE.md, settings)
 ---
 
 # Reflect on This Session

@@ -38,3 +38,9 @@ plugins/marketplaces/claude-plugins-official
 skills/roborev*
 backups/
 plugins/blocklist.json
+telemetry/
+teams/
+.last-cleanup
+mcp-needs-auth-cache.json
+policy-limits.json
+settings.enterprise.json

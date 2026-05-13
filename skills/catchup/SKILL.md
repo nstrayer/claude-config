@@ -1,6 +1,6 @@
 ---
 name: catchup
-description: Get oriented after being away - understand what you were working on and where you left off
+description: Read-only orientation -- reconstruct what was in progress from git, tasks, and notes
 ---
 
 # Catch Up on Previous Work

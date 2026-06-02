@@ -1,23 +1,30 @@
-## Core Behaviors
+# Philosophy for work
 
-- Ask targeted clarifying questions when requirements are unclear
-- Use AskUserQuestion tool when: asking multiple questions, offering choices between approaches, or any question with 2-4 clear options. Plain text only for truly open-ended questions with no obvious options.
-- Prefer the simplest design that meets requirements; state trade-offs and risks
-- Break work into small, testable pieces with clear boundaries
-- Don't add features, refactor code, or make improvements beyond what was asked. If I ask you to "clean up," "improve," or "refactor," then broader changes are appropriate.
-- After each turn where code changes were made, commit them unless the changes are incomplete or the user says otherwise. Split changes into logical, single-purpose commits (e.g., a refactor and a new feature should be separate commits). Use conventional commit messages (e.g., `feat:`, `fix:`, `refactor:`, `docs:`, `test:`)
-- After making changes, run relevant existing tests to catch regressions.
-- Use `gh pr view <num> --json <fields>` instead of bare `gh pr view <num>`; the bare form fails with a Projects (classic) deprecation GraphQL error.
-- Check `--help` before using `gh` extensions (e.g. `gh pr-review`); flags differ from the base CLI and required flags aren't always obvious.
+**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
 
+## 1. Think Before Coding
 
-## Code Style
+**Don't assume. Don't hide confusion. Surface tradeoffs.**
 
-- Use clear names, early returns, and shallow control flow
-- Avoid unicode characters (em dashes, smart quotes, etc.) in code and text.
+Before implementing:
+- State your assumptions explicitly. If uncertain, ask.
+- If multiple interpretations exist, present them - don't pick silently.
+- If a simpler approach exists, say so. Push back when warranted.
+- If something is unclear, stop. Name what's confusing. Ask.
 
+## 2. Simplicity First
 
-## Architecture: Deep Modules
+**Minimum code that solves the problem. Nothing speculative.**
+
+- No features beyond what was asked.
+- No abstractions for single-use code.
+- No "flexibility" or "configurability" that wasn't requested.
+- No error handling for impossible scenarios.
+- If you write 200 lines and it could be 50, rewrite it.
+
+Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
+
+## 2. Deep Modules
 
 Prefer deep modules at every scale: a lot of behavior behind a small interface.
 
@@ -27,7 +34,44 @@ Prefer deep modules at every scale: a lot of behavior behind a small interface.
 - **Test at the interface.** If you need to reach into internals to test, the module is the wrong shape.
 - **Inline pass-throughs.** A function that delegates to another with the same signature adds interface without depth.
 
+## 3. Surgical Changes
 
-## Agent Notes
+**Touch only what you must. Clean up only your own mess.**
 
-- `thoughts/agent-notes/` contains development notes from past sessions -- architectural decisions, non-obvious patterns, gotchas, and API contracts. Check here for context before working on a subsystem.
+When editing existing code:
+- Don't "improve" adjacent code, comments, or formatting.
+- Don't refactor things that aren't broken.
+- Match existing style, even if you'd do it differently.
+- If you notice unrelated dead code, mention it - don't delete it.
+
+When your changes create orphans:
+- Remove imports/variables/functions that YOUR changes made unused.
+- Don't remove pre-existing dead code unless asked.
+
+The test: Every changed line should trace directly to the user's request.
+
+## 4. Goal-Driven Execution
+
+**Define success criteria. Loop until verified.**
+
+Transform tasks into verifiable goals:
+- "Add validation" → "Write tests for invalid inputs, then make them pass"
+- "Fix the bug" → "Write a test that reproduces it, then make it pass"
+- "Refactor X" → "Ensure tests pass before and after"
+
+For multi-step tasks, state a brief plan:
+```
+1. [Step] → verify: [check]
+2. [Step] → verify: [check]
+3. [Step] → verify: [check]
+```
+
+Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
+
+
+## General Guidelines
+- Ask simple to the point questions. If the answers are clear and simple use the AskUserQuestion tool. Don't overwhelm with a bunch of questions at once. 
+- Use clear names, early returns, and shallow control flow
+- Avoid unicode characters (em dashes, smart quotes, etc.) in code and text.
+- Some projects use `thoughts/agent-notes/` for development notes from past sessions -- architectural decisions, non-obvious patterns, gotchas, and API contracts. Check here for context before working on a subsystem.
+- After every meaningful unit of work, commit the changes with a short and descriptive commit message. 

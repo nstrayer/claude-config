@@ -9,7 +9,13 @@ Record a note in the Obsidian vault under `~/Documents/Nick's Vault/claude-notes
 
 1. **Determine context name.**
 
-   Run:
+   First, check whether the note spans multiple repos. Signals:
+   - The user explicitly mentions multiple repos or a cross-repo concern (e.g., "this affects positron and rstudio-ide", "shared migration note").
+   - The topic is inherently cross-repo (e.g., coordinating a package migration across a monorepo, a shared protocol between services).
+
+   If cross-repo: use `shared` as `<context>`. The note content should mention which repos are involved.
+
+   If single-repo (the common case): run:
    ```bash
    git remote get-url origin 2>/dev/null
    ```
@@ -19,6 +25,8 @@ Record a note in the Obsidian vault under `~/Documents/Nick's Vault/claude-notes
    - If the command fails (not a git repo), use the basename of the current working directory.
 
    Store this as `<context>`.
+
+   If genuinely ambiguous whether the note is repo-specific or shared, ask the user.
 
 2. **Scan existing theme files.**
 

@@ -20,14 +20,18 @@ Read notes from `~/Documents/Nick's Vault/claude-notes/`.
 
 2. **List available notes.**
 
+   Check both the repo-specific context and the `shared` context:
    ```bash
    ls ~/Documents/Nick\'s\ Vault/claude-notes/<context>/ 2>/dev/null
+   ls ~/Documents/Nick\'s\ Vault/claude-notes/shared/ 2>/dev/null
    ```
 
-   If the directory does not exist, tell the user there are no notes for this context and list available contexts:
+   If neither directory exists, tell the user there are no notes for this context and list available contexts:
    ```bash
    ls ~/Documents/Nick\'s\ Vault/claude-notes/
    ```
+
+   When presenting results, include relevant shared notes alongside repo-specific ones.
 
 3. **Select and read notes.**
 

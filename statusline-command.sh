@@ -78,17 +78,35 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
     git_info="${repo_name}:${head}"
   fi
 
+  # Keep origin/main reasonably fresh without blocking the status line:
+  # kick off a detached `git fetch` at most once per 60s. The stamp is
+  # touched before launching so an offline machine can't spawn a storm of
+  # retries (FETCH_HEAD only updates on success, the stamp on every attempt).
+  stamp=$(git rev-parse --git-path statusline-fetch-stamp 2>/dev/null)
+  if [ -n "$stamp" ]; then
+    now=$(date +%s)
+    last=0
+    [ -f "$stamp" ] && last=$(stat -f %m "$stamp" 2>/dev/null || stat -c %Y "$stamp" 2>/dev/null || echo 0)
+    if [ $(( now - last )) -ge 60 ]; then
+      touch "$stamp" 2>/dev/null
+      ( git fetch --quiet >/dev/null 2>&1 & )
+    fi
+  fi
+
   # Diff stats vs main: counts committed branch work + uncommitted edits,
   # using the merge-base so main advancing doesn't pollute the count.
-  main_branch=""
-  for candidate in main master; do
-    if git show-ref --verify --quiet "refs/heads/${candidate}"; then
-      main_branch="$candidate"
+  # Prefer the remote-tracking ref (origin/main) so the indicators reflect
+  # the real upstream, not a possibly-stale local main; fall back to local.
+  main_ref=""
+  for candidate in refs/remotes/origin/main refs/remotes/origin/master refs/heads/main refs/heads/master; do
+    if git show-ref --verify --quiet "$candidate"; then
+      main_ref=${candidate#refs/remotes/}
+      main_ref=${main_ref#refs/heads/}
       break
     fi
   done
-  if [ -n "$main_branch" ]; then
-    merge_base=$(git merge-base "$main_branch" HEAD 2>/dev/null)
+  if [ -n "$main_ref" ]; then
+    merge_base=$(git merge-base "$main_ref" HEAD 2>/dev/null)
     if [ -n "$merge_base" ]; then
       shortstat=$(git diff --shortstat "$merge_base" 2>/dev/null)
       added=$(echo "$shortstat" | grep -oE '[0-9]+ insertion' | grep -oE '[0-9]+')
@@ -98,8 +116,8 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
       if [ "$added" -gt 0 ] || [ "$removed" -gt 0 ]; then
         git_info="${git_info} ${GREEN}+${added}${RESET} ${RED}-${removed}${RESET}"
       fi
-      # How far behind main: commits on main not yet in HEAD.
-      behind=$(git rev-list --count "HEAD..${main_branch}" 2>/dev/null)
+      # How far behind remote main: commits on main not yet in HEAD.
+      behind=$(git rev-list --count "HEAD..${main_ref}" 2>/dev/null)
       if [ -n "$behind" ] && [ "$behind" -gt 0 ]; then
         git_info="${git_info} ${YELLOW}↓${behind}${RESET}"
       fi

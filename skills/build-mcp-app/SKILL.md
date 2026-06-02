@@ -1,6 +1,6 @@
 ---
 name: build-mcp-app
-description: Scaffold a new MCP server on a Cloudflare Worker -- thin CRUD tools over KV plus an interactive MCP Apps widget (React + Tailwind) that renders in the Claude consumer app (web/desktop/iOS). Use when the user wants to build an MCP server, a Claude custom connector, an "MCP app", or a Cloudflare Worker MCP, especially one with an in-chat UI widget.
+description: Scaffold a hosted MCP server with optional in-chat widgets.
 argument-hint: [project-name]
 ---
 

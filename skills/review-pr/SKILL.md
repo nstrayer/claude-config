@@ -1,6 +1,6 @@
 ---
 name: review-pr
-description: Get acquainted with a PR - checkout and generate a summary document
+description: Get acquainted with a PR - checkout, generate a summary document, and run a quality review
 ---
 
 # Review PR: Get Acquainted Before Diving In
@@ -245,19 +245,74 @@ After creating the file, check if `PR-REVIEW-*.md` is in `.gitignore`:
 1. `grep "PR-REVIEW" .gitignore` (if .gitignore exists)
 2. If not found, suggest: "Consider adding `PR-REVIEW-*.md` to your .gitignore to keep these review files local."
 
-## Phase 6: Present Summary
+## Phase 6: Quality Review
+
+After generating the summary document, run a quality review of the branch changes. This is the deep-review pass that checks architecture, test value, and decision clarity.
+
+### Determine the base branch
+
+Use `baseRefName` from the PR metadata (typically `main`).
+
+### Run three review passes
+
+1. `git log <base>..HEAD --format="%h %s%n%b%n---"` and `git diff <base>...HEAD --stat` to understand scope
+2. Read all changed files. Use an Explore agent for large diffs (>10 files).
+3. Run three read-only passes against the changes (note findings, do not edit any files):
+
+**Pass 1 -- Architecture:**
+- Deletion test: would removing an abstraction concentrate or scatter complexity?
+- Shallow modules (interface ~= implementation)? Flag them.
+- Speculative seams (one adapter)? Flag them.
+- Pass-throughs adding interface without depth? Flag them.
+
+**Pass 2 -- Test Value:**
+- Tests must target the interface, not internals.
+- Each test must catch a real failure mode -- not mirror the implementation.
+- Flag tests that only add coverage percentage without catching real risk paths.
+
+**Pass 3 -- Decision Clarity:**
+- Every non-obvious "why this way?" must be answerable from naming, structure, or a one-line comment.
+- Flag decisions requiring oral tradition.
+
+### Important: Read-only review
+
+Do NOT make any fixes or edits to the code. This is a review -- only note findings. The user will decide what to act on.
+
+### Append findings to summary document
+
+Append a `## Quality Review` section to the existing `PR-REVIEW-<number>.md` file, before the `## Review Notes` section. Format:
+
+```markdown
+## Quality Review
+
+### Findings
+<List issues found with the issue description and suggested resolution. Cite `file:line` for each. Categorize as Architecture, Test Value, or Decision Clarity.>
+
+### Verdict
+<One sentence: is the branch solid, or does it need work? If solid, say so and stop. Don't pad.>
+```
+
+If the branch is solid with no findings, write:
+
+```markdown
+## Quality Review
+
+Branch is solid. No architectural, test, or clarity issues found.
+```
+
+## Phase 7: Present Summary
 
 Display a brief summary of what was done:
 
 ```
-Created PR-REVIEW-<number>.md with summary of PR #<number>: "<title>"
+Created PR-REVIEW-<number>.md with summary and quality review of PR #<number>: "<title>"
 
 You're now on branch: <branch>
 <If worktree: "Worktree created at: <path>\n\nTo switch to the worktree:\n  cd <path>">
 <If stashed: "Your previous changes are stashed - run `git stash pop` when done">
 ```
 
-The user can now explore the PR on their own or ask follow-up questions naturally.
+Then present a concise summary of the quality review findings (Fixed/Flagged/Verdict) directly in the conversation so the user doesn't have to open the file to see the result.
 
 ## Edge Cases
 

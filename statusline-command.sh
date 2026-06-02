@@ -16,6 +16,8 @@ used_pct=$(echo "$data" | jq -r '.context_window.used_percentage // empty')
 # Color codes
 BLUE='\033[34m'
 RED='\033[31m'
+GREEN='\033[32m'
+YELLOW='\033[33m'
 RESET='\033[0m'
 
 # Format context display
@@ -74,6 +76,34 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
   elif head=$(git rev-parse --short HEAD 2>/dev/null); then
     # Detached HEAD state
     git_info="${repo_name}:${head}"
+  fi
+
+  # Diff stats vs main: counts committed branch work + uncommitted edits,
+  # using the merge-base so main advancing doesn't pollute the count.
+  main_branch=""
+  for candidate in main master; do
+    if git show-ref --verify --quiet "refs/heads/${candidate}"; then
+      main_branch="$candidate"
+      break
+    fi
+  done
+  if [ -n "$main_branch" ]; then
+    merge_base=$(git merge-base "$main_branch" HEAD 2>/dev/null)
+    if [ -n "$merge_base" ]; then
+      shortstat=$(git diff --shortstat "$merge_base" 2>/dev/null)
+      added=$(echo "$shortstat" | grep -oE '[0-9]+ insertion' | grep -oE '[0-9]+')
+      removed=$(echo "$shortstat" | grep -oE '[0-9]+ deletion' | grep -oE '[0-9]+')
+      added=${added:-0}
+      removed=${removed:-0}
+      if [ "$added" -gt 0 ] || [ "$removed" -gt 0 ]; then
+        git_info="${git_info} ${GREEN}+${added}${RESET} ${RED}-${removed}${RESET}"
+      fi
+      # How far behind main: commits on main not yet in HEAD.
+      behind=$(git rev-list --count "HEAD..${main_branch}" 2>/dev/null)
+      if [ -n "$behind" ] && [ "$behind" -gt 0 ]; then
+        git_info="${git_info} ${YELLOW}↓${behind}${RESET}"
+      fi
+    fi
   fi
 fi
 

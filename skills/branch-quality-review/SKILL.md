@@ -38,3 +38,5 @@ Apply improve-codebase-architecture vocabulary (module, depth, seam, locality, l
 
 - If branch is solid, say so and stop. Don't pad.
 - Cite `file:line` for every finding.
+
+After presenting findings, suggest running `grill-my-pr` if the user wants to pressure-test that they can defend every decision before submitting.

@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@source "./widget.tsx";
+
+/* Map a few semantic tokens to the host's CSS variables (applied by
+   useHostStyleVariables) so the widget matches the host's palette and
+   light/dark, falling back to sensible light defaults when run standalone. */
+@theme {
+  --color-fg: var(--color-text-primary, #111827);
+  --color-muted: var(--color-text-secondary, #6b7280);
+  --color-border: var(--color-border-primary, #e5e7eb);
+  --color-accent: var(--color-background-info, #1a6fd4);
+}
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    background: var(--color-background-primary, #fff);
+  }
+}

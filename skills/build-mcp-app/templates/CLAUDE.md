@@ -6,8 +6,9 @@ CONTEXT.md for the domain language, and docs/adr/ for the key decisions.
 ## Shape
 
 - `src/index.ts` -- the `McpAgent` + `McpServer`: thin CRUD tools + `open_view`.
-- `client/widget.ts` -- the browser widget (MCP Apps), bundled by
-  `scripts/build-ui.mjs` into `src/ui/widget-html.ts` (generated; gitignored).
+- `client/widget.tsx` + `client/app.css` -- the React + Tailwind widget (MCP
+  Apps), bundled by `scripts/build-ui.mjs` into `src/ui/widget-html.ts`
+  (generated; gitignored).
 - Auth is a secret in the URL path; the KV store is the source of truth.
 
 ## Conventions

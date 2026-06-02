@@ -2,7 +2,8 @@
 
 An MCP server on Cloudflare Workers, usable from the Claude consumer app (web,
 desktop, iOS/Android) as a custom connector added by URL. It exposes a thin set
-of tools plus an interactive MCP Apps widget that renders in chat.
+of tools plus an interactive MCP Apps widget (React + Tailwind) that renders in
+chat.
 
 - Transport: Streamable HTTP MCP (via the Cloudflare `agents` `McpAgent`)
 - Storage: Workers KV (binding `STORE`)

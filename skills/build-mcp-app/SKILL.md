@@ -1,6 +1,6 @@
 ---
 name: build-mcp-app
-description: Scaffold a new MCP server on a Cloudflare Worker -- thin CRUD tools over KV plus an optional interactive MCP Apps widget that renders in the Claude consumer app (web/desktop/iOS). Use when the user wants to build an MCP server, a Claude custom connector, an "MCP app", or a Cloudflare Worker MCP, especially one with an in-chat UI widget.
+description: Scaffold a new MCP server on a Cloudflare Worker -- thin CRUD tools over KV plus an interactive MCP Apps widget (React + Tailwind) that renders in the Claude consumer app (web/desktop/iOS). Use when the user wants to build an MCP server, a Claude custom connector, an "MCP app", or a Cloudflare Worker MCP, especially one with an in-chat UI widget.
 argument-hint: [project-name]
 ---
 
@@ -8,10 +8,10 @@ argument-hint: [project-name]
 
 Scaffolds the pattern proven in workout-mcp: a `McpAgent` + `McpServer` served
 over Streamable HTTP, secret-in-path auth, KV storage, a thin CRUD tool surface,
-and (by default) an interactive MCP Apps widget that renders in the Claude
-consumer app. The hard-won bits -- the `_meta.ui` contract, the esbuild
-zod-locale fix, the verify scripts -- are baked into the templates so they are
-never rediscovered. Read [REFERENCE.md](REFERENCE.md) for the full rationale and
+and (by default) an interactive MCP Apps widget (React + Tailwind) that renders
+in the Claude consumer app. The hard-won bits -- the `_meta.ui` contract, the
+esbuild zod-locale fix, the build-time Tailwind step, the verify scripts -- are
+baked into the templates so they are never rediscovered. Read [REFERENCE.md](REFERENCE.md) for the full rationale and
 the gotchas you must preserve.
 
 ## 1. Intake (ask briefly, then build)
@@ -45,9 +45,10 @@ The scaffold ships a generic `Item` store as a worked example. Replace it with
 the user's real domain, editing these in lockstep so the contract stays intact:
 
 - `src/index.ts` -- the store shape, the CRUD tools, and the `open_view` seed.
-- `client/widget.ts` -- what the widget shows and which tools it calls.
-- `scripts/build-ui.mjs` -- the widget's HTML/CSS shell. **Keep the esbuild call
-  and the `oneZodLocale` plugin EXACTLY as-is.**
+- `client/widget.tsx` -- the React widget: what it shows and which tools it calls.
+- `client/app.css` -- the Tailwind entry + host-variable theme tokens.
+- `scripts/build-ui.mjs` -- the HTML shell. **Keep the esbuild call, the
+  `oneZodLocale` plugin, and the Tailwind PostCSS step EXACTLY as-is.**
 - `scripts/verify-ui.mjs`, `scripts/smoke.mjs` -- the tool/view names.
 - `CONTEXT.md`, `README.md`, `docs/adr/` -- the domain language and decisions.
 
@@ -70,7 +71,8 @@ in the generated README.md).
 
 ## Gotchas you must preserve
 
-The full list is in REFERENCE.md. The critical ones: bundle the client (no CDN),
-keep the zod-locale esbuild alias, the `ui://` resource mimeType is exactly
-`text/html;profile=mcp-app`, and the model only learns of widget writes by
+The full list is in REFERENCE.md. The critical ones: bundle everything (React +
+Tailwind) into one HTML string with no runtime CDN (Tailwind runs at build time --
+no Play CDN), keep the zod-locale esbuild alias, the `ui://` resource mimeType is
+exactly `text/html;profile=mcp-app`, and the model only learns of widget writes by
 re-reading a tool (not via pushed `updateModelContext`).

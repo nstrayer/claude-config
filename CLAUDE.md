@@ -74,4 +74,6 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - Use clear names, early returns, and shallow control flow
 - Avoid unicode characters (em dashes, smart quotes, etc.) in code and text.
 - Some projects use `thoughts/agent-notes/` for development notes from past sessions -- architectural decisions, non-obvious patterns, gotchas, and API contracts. Check here for context before working on a subsystem.
-- After every meaningful unit of work, commit the changes with a short and descriptive commit message. 
+- After every meaningful unit of work, commit the changes with a short and descriptive commit message.
+- gh requests the deprecated `projectCards` field, so commands that read PR/issue metadata (`gh pr|issue view|list|edit`) can hit a "Projects (classic) is being deprecated" GraphQL error -- usually a harmless warning on reads, but on `edit`/mutations it can silently abort the change (the command appears to run, yet nothing changes).
+- Make PR/issue body or field mutations via REST to sidestep it: `gh api repos/{owner}/{repo}/pulls/{number} -X PATCH -F body=@body.md`. Scope reads with `--json <fields>` to avoid project fields, and verify a mutation actually applied (e.g. `gh pr view N --json body`).

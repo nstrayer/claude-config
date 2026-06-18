@@ -247,36 +247,13 @@ After creating the file, check if `PR-REVIEW-*.md` is in `.gitignore`:
 
 ## Phase 6: Quality Review
 
-After generating the summary document, run a quality review of the branch changes. This is the deep-review pass that checks architecture, test value, and decision clarity.
+After generating the summary document, run a quality review of the branch changes by invoking the core review skill.
 
-### Determine the base branch
+### Run the core review
 
-Use `baseRefName` from the PR metadata (typically `main`).
+Invoke `branch-quality-review --read-only <baseRefName>`, using `baseRefName` from the PR metadata (typically `main`) as the base ref. Read-only mode is mandatory here: this is someone else's PR, so the skill notes findings without editing any files.
 
-### Run three review passes
-
-1. `git log <base>..HEAD --format="%h %s%n%b%n---"` and `git diff <base>...HEAD --stat` to understand scope
-2. Read all changed files. Use an Explore agent for large diffs (>10 files).
-3. Run three read-only passes against the changes (note findings, do not edit any files):
-
-**Pass 1 -- Architecture:**
-- Deletion test: would removing an abstraction concentrate or scatter complexity?
-- Shallow modules (interface ~= implementation)? Flag them.
-- Speculative seams (one adapter)? Flag them.
-- Pass-throughs adding interface without depth? Flag them.
-
-**Pass 2 -- Test Value:**
-- Tests must target the interface, not internals.
-- Each test must catch a real failure mode -- not mirror the implementation.
-- Flag tests that only add coverage percentage without catching real risk paths.
-
-**Pass 3 -- Decision Clarity:**
-- Every non-obvious "why this way?" must be answerable from naming, structure, or a one-line comment.
-- Flag decisions requiring oral tradition.
-
-### Important: Read-only review
-
-Do NOT make any fixes or edits to the code. This is a review -- only note findings. The user will decide what to act on.
+The core skill handles scoping the diff, reading changed files, loading any repo-specific review patterns, and running its four passes (correctness, architecture, test value, decision clarity). Capture its findings.
 
 ### Append findings to summary document
 

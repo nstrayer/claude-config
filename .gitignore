@@ -12,6 +12,14 @@ tasks/
 cache/
 statsig/
 stats-cache.json
+.active-profile
+.last-update-result.json
+.ponytail-active
+context-mode/
+daemon.log
+daemon/
+jobs/
+usage-data/
 
 # Project-specific data (contains session transcripts)
 projects/
@@ -39,6 +47,8 @@ plugins/marketplaces/claude-plugins-official
 skills/roborev*
 backups/
 plugins/blocklist.json
+plugins/.last_inuse_sweep
+plugins/plugin-catalog-cache.json
 telemetry/
 teams/
 .last-cleanup

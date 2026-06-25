@@ -9,6 +9,10 @@ data=$(cat)
 full_model=$(echo "$data" | jq -r '.model.display_name // .model.id // "unknown"')
 model=$(echo "$full_model" | sed -E 's/^Claude //' | sed -E 's/^3\.5/3.5/' | awk '{print $1, $2}')
 
+# Get the last-selected Claude profile (set by the claude-use shell function).
+# This reflects which settings file is active, not the authenticated account.
+profile=$(cat ~/.claude/.active-profile 2>/dev/null)
+
 # Get context info
 max_ctx=$(echo "$data" | jq -r '.context_window.context_window_size // 200000')
 used_pct=$(echo "$data" | jq -r '.context_window.used_percentage // empty')
@@ -67,6 +71,7 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
     repo_name=$(basename "$(git rev-parse --show-toplevel 2>/dev/null)")
   fi
   branch=$(git branch --show-current 2>/dev/null)
+  current_branch="$branch"  # untruncated, for the remote-branch sync check below
   # Truncate long branch names: show ...last20chars if over 23
   if [ -n "$branch" ] && [ "${#branch}" -gt 23 ]; then
     branch="...${branch: -20}"
@@ -119,15 +124,39 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
       # How far behind remote main: commits on main not yet in HEAD.
       behind=$(git rev-list --count "HEAD..${main_ref}" 2>/dev/null)
       if [ -n "$behind" ] && [ "$behind" -gt 0 ]; then
-        git_info="${git_info} ${YELLOW}↓${behind}${RESET}"
+        git_info="${git_info} ${YELLOW}⌂↓${behind}${RESET}"
       fi
     fi
   fi
+
+  # Sync vs this branch's own remote (origin/<branch>), if that ref exists.
+  # ahead = local commits not yet pushed; behind = remote commits not pulled.
+  if [ -n "$current_branch" ] && git show-ref --verify --quiet "refs/remotes/origin/${current_branch}"; then
+    counts=$(git rev-list --left-right --count "HEAD...origin/${current_branch}" 2>/dev/null)
+    ahead=$(echo "$counts" | awk '{print $1}')
+    rbehind=$(echo "$counts" | awk '{print $2}')
+    sync=""
+    [ -n "$ahead" ] && [ "$ahead" -gt 0 ] && sync="${sync}↑${ahead}"
+    [ -n "$rbehind" ] && [ "$rbehind" -gt 0 ] && sync="${sync}↓${rbehind}"
+    [ -n "$sync" ] && git_info="${git_info} ${YELLOW}☁${sync}${RESET}"
+  fi
 fi
 
-# Output: Model | Git (if applicable) | Context
+# Profile prefix (if set): color-code so the active account is obvious at a glance
+profile_info=""
+if [ -n "$profile" ]; then
+  case "$profile" in
+    bedrock)    PCOLOR="$YELLOW" ;;
+    enterprise) PCOLOR="$BLUE" ;;
+    personal)   PCOLOR="$GREEN" ;;
+    *)          PCOLOR="$RESET" ;;
+  esac
+  profile_info="${PCOLOR}[${profile}]${RESET} "
+fi
+
+# Output: [Profile] Model | Git (if applicable) | Context
 if [ -n "$git_info" ]; then
-  printf '%b' "${model} | ${git_info} | ${context_info}"
+  printf '%b' "${profile_info}${model} | ${git_info} | ${context_info}"
 else
-  printf '%b' "${model} | ${context_info}"
+  printf '%b' "${profile_info}${model} | ${context_info}"
 fi

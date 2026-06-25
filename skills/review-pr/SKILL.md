@@ -253,7 +253,7 @@ After generating the summary document, run a quality review of the branch change
 
 Invoke `branch-quality-review --read-only <baseRefName>`, using `baseRefName` from the PR metadata (typically `main`) as the base ref. Read-only mode is mandatory here: this is someone else's PR, so the skill notes findings without editing any files.
 
-The core skill handles scoping the diff, reading changed files, loading any repo-specific review patterns, and running its four passes (correctness, architecture, test value, decision clarity). Capture its findings.
+The core skill handles scoping the diff, reading changed files, loading any repo-specific review patterns, and running its two passes (bugs, then design). Capture its findings.
 
 ### Append findings to summary document
 
@@ -305,7 +305,5 @@ Then present a concise summary of the quality review findings (Fixed/Flagged/Ver
 
 ## Important Notes
 
-- This command is for getting acquainted with a PR, not for approving or merging
-- The generated summary file is for the reviewer's personal notes
 - Always let the user choose how to handle their git state - don't make assumptions
 - Keep the summary concise but comprehensive

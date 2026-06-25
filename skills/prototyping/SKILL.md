@@ -1,6 +1,7 @@
 ---
 name: prototyping
-description: Use when the user wants to quickly prototype an idea, build a rough proof-of-concept, explore a concept, or try something out fast. Also use when the user says /prototype.
+description: Quickly build a rough, tryable proof-of-concept -- defer architecture, tests, and polish.
+disable-model-invocation: true
 ---
 
 # Rapid Prototyping

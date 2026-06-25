@@ -1,6 +1,7 @@
 ---
 name: productionize
 description: Transition a validated prototype branch into production-quality code
+disable-model-invocation: true
 ---
 
 # Productionize
@@ -75,21 +76,6 @@ In both cases:
 - Summarize: what changed architecturally and why
 - Offer to clean up or delete the prototype branch
 - Use superpowers:finishing-a-development-branch for merge/PR options
-
-## Decision Framework
-
-```dot
-digraph productionize {
-    "Audit prototype" -> "Deletion test";
-    "Deletion test" -> "Same structure?" [label="imagine rebuilding"];
-    "Same structure?" -> "Reshape" [label="yes, roughly"];
-    "Same structure?" -> "Rewrite" [label="no, fundamentally different"];
-    "Reshape" -> "Design seams & depth";
-    "Rewrite" -> "Design seams & depth";
-    "Design seams & depth" -> "Implement with TDD";
-    "Implement with TDD" -> "Verify behavior matches prototype";
-}
-```
 
 ## Common Mistakes
 

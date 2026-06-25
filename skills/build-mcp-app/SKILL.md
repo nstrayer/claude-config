@@ -1,6 +1,7 @@
 ---
 name: build-mcp-app
 description: Scaffold a hosted MCP server with optional in-chat widgets.
+disable-model-invocation: true
 argument-hint: [project-name]
 ---
 

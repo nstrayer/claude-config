@@ -1,6 +1,6 @@
 ---
 name: watch-ci-until-green
-description: Watch a Positron PR's CI checks until they all pass, auto-fixing easy failures. Use after pushing a branch/PR when asked to "watch CI", "wait until green", "babysit the checks", or to drive a PR's CI run to a green finish. Polls gh pr checks until terminal, repushes fixes for trivial failures, repeats until every check is green.
+description: Watch a Positron PR's CI checks until they all pass, auto-fixing easy failures. Use after pushing a branch/PR when asked to "watch CI", "wait until green", "babysit the checks", or to drive a PR's CI run to a green finish.
 ---
 
 # Watch CI until green

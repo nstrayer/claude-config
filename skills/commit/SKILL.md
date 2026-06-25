@@ -1,24 +1,15 @@
 ---
 name: commit
-description: Create git commits with user approval and no Claude attribution
+description: Create git commits with user approval
 ---
 
 # Commit Changes
 
-You are tasked with creating git commits for the changes made during this session.
-
 ## Process:
 
-1. **Think about what changed:**
-   - Review the conversation history and understand what was accomplished
-   - Check current changes with `git status` and `git diff`
-   - Consider whether changes should be one commit/change or multiple logical commits/changes
+1. **Review the changes:** `git status` and `git diff`; decide whether they're one commit or several logical ones.
 
-2. **Plan your commit(s):**
-   - Identify which files belong together
-   - Draft clear, descriptive commit messages
-   - Use imperative mood in commit messages
-   - Focus on why the changes were made, not just what
+2. **Plan your commit(s):** group related files; write messages in imperative mood, focused on why not just what.
 
 3. **Present your plan to the user:**
    - List the files you plan to include for each commit/change
@@ -31,14 +22,5 @@ You are tasked with creating git commits for the changes made during this sessio
    - Show the result with `git log --oneline -n [number]`
 
 ## Important:
-- **NEVER add co-author information or Claude attribution**
-- Commits should be authored solely by the user
-- Do not include any "Generated with Claude" messages
-- Do not add "Co-Authored-By" lines
-- Write commit messages as if the user wrote them
-
-## Remember:
-- You have the full context of what was done in this session
-- Group related changes together
-- Keep commits focused and atomic when possible
-- The user trusts your judgment - they asked you to commit
+- **NEVER add co-author information or Claude attribution** -- no "Generated with Claude", no "Co-Authored-By". Write commit messages as if the user wrote them.
+- Keep commits focused and atomic.

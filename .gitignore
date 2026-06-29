@@ -36,6 +36,7 @@ remote-settings.json
 
 # Backup directories (if you want to keep these, remove this line)
 *_backup/
+skills.backup-*/
 plugins/known_marketplaces.json
 plugins/marketplaces/
 plugins/install-counts-cache.json

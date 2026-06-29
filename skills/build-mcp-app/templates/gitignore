@@ -1,7 +1,0 @@
-node_modules/
-.dev.vars
-.wrangler/
-dist/
-*.log
-# generated widget bundle (run `npm run build:ui`)
-src/ui/widget-html.ts

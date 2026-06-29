@@ -14,7 +14,6 @@ statsig/
 stats-cache.json
 .active-profile
 .last-update-result.json
-.ponytail-active
 context-mode/
 daemon.log
 daemon/

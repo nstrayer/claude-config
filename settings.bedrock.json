@@ -97,14 +97,6 @@
     "command": "bash ~/.claude/statusline-command.sh"
   },
   "enabledPlugins": {},
-  "extraKnownMarketplaces": {
-    "ponytail": {
-      "source": {
-        "source": "github",
-        "repo": "DietrichGebert/ponytail"
-      }
-    }
-  },
   "spinnerVerbs": {
     "mode": "append",
     "verbs": [
